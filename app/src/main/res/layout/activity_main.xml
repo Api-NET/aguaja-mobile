@@ -11,25 +11,33 @@
 
 
     <EditText
-        android:id="@+id/edit_text_email"
+        android:id="@+id/edit_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
         android:layout_marginTop="300dp"/>
     <EditText
-        android:id="@+id/edit_text_senha"
+        android:id="@+id/edit_senha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Senha"
         android:layout_marginTop="16dp"/>
+
     <Button
         android:id="@+id/btn_login"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Login"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:background="@drawable/button_green_main_activity"/>
+        android:background="@drawable/button_green_main_activity"
+        android:onClick="clica"
+        android:text="Login" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="91dp"
+        android:layout_height="wrap_content"
+        android:text="texto" />
 
 
 </LinearLayout>
