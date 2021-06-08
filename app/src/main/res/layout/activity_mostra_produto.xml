@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MostraProdutoActivity">
+    <TextView
+        android:id="@+id/produto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"/>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/aumenta"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#147511"
+            android:onClick="aumentaVolume"
+            android:text="+" />
+
+        <EditText
+            android:id="@+id/qtd"
+            android:layout_width="46dp"
+            android:layout_height="56dp"
+            android:textSize="60px"
+            android:ems="10"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/diminui"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#DF1919"
+            android:onClick="diminuiVolume"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/lblPreco"
+            android:layout_width="64dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="50px"
+            android:text="Preço: R$" />
+
+        <TextView
+            android:id="@+id/valorPreco"
+            android:layout_width="86dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="0dp"
+            android:layout_weight="1"
+            android:textSize="50px"
+            android:text="" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/comprar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0CEAD7"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Comprar" />
+
+</LinearLayout>
