@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,36 +39,13 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
     }
     public void clica(View view) {
          email = (EditText)findViewById(R.id.edit_email);
          senha = (EditText)findViewById(R.id.edit_senha);
         lblRest = (TextView)findViewById(R.id.text);
-        chamaLista();
         login();
     }
-    
-//    public void solicitaTodosclientes() {
-//        meuQue = Volley.newRequestQueue(this);
-//        minhaStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                StringBuilder texto = new StringBuilder();
-//
-//                lblRest.setText(response);
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                lblRest.setText("Erro na API" + error.toString());
-//                error.printStackTrace();
-//            }
-//        });
-//        meuQue.add(minhaStringRequest);
-//    }
 
     public void login() {
         meuQue = Volley.newRequestQueue(this);
@@ -86,6 +64,8 @@ public class MainActivity extends AppCompatActivity{
                                 String senha = obj.getString("password");
                                 checaCredenciais(email, senha);
                             }
+                            Toast toast = Toast.makeText(getApplicationContext(), "Usuário ou senha incorretos!", Toast.LENGTH_LONG);
+                            toast.show();
                         }catch(JSONException e) {
                             e.printStackTrace();
                         }
@@ -101,6 +81,7 @@ public class MainActivity extends AppCompatActivity{
     public void checaCredenciais(String email, String senha) {
 
         if (this.email.getText().toString().equals(email)  && this.senha.getText().toString().equals(senha)  ){
+
             chamaLista();
         }
 
