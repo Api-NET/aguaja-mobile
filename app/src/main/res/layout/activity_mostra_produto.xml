@@ -6,11 +6,55 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MostraProdutoActivity">
+
     <TextView
-        android:id="@+id/produto"
-        android:layout_width="match_parent"
+        android:id="@+id/nome"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="25dp"
+        android:foregroundTint="#0EC5B5"
+        android:paddingVertical="60dp"
+        android:text="Nome"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="60px"
+        app:drawableTint="#FFFFFF" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:orientation="horizontal"
+        android:paddingVertical="60dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="102dp"
+            android:layout_height="104dp"
+            app:srcCompat="@drawable/garrafao" />
+
+        <TextView
+            android:id="@+id/descriçao"
+            android:layout_width="132dp"
+            android:layout_height="99dp"
+            android:layout_marginTop="-10dp"
+            android:text="Descrição"
+            android:textColor="@color/black"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/litros"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="70dp"
+            android:text="Litros"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="60px" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_marginTop="15dp"
@@ -29,10 +73,11 @@
         <EditText
             android:id="@+id/qtd"
             android:layout_width="46dp"
-            android:layout_height="56dp"
-            android:textSize="60px"
+            android:layout_height="wrap_content"
             android:ems="10"
-            android:text="1" />
+            android:text="1"
+            android:textSize="60px"
+            android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/diminui"
@@ -43,31 +88,24 @@
             android:text="-" />
 
         <TextView
-            android:id="@+id/lblPreco"
-            android:layout_width="64dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="20dp"
-            android:textSize="50px"
-            android:text="Preço: R$" />
-
-        <TextView
             android:id="@+id/valorPreco"
-            android:layout_width="86dp"
-            android:layout_height="29dp"
-            android:layout_marginLeft="0dp"
-            android:layout_weight="1"
-            android:textSize="50px"
-            android:text="" />
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="50px" />
     </LinearLayout>
 
     <Button
         android:id="@+id/comprar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#0CEAD7"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#0CEAD7"
+        android:onClick="compra"
         android:text="Comprar" />
 
 </LinearLayout>
