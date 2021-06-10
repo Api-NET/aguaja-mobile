@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+    android:backgroundTint="#656565"
+    android:orientation="horizontal"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
+
+    <ImageView
+        android:id="@+id/imagem"
+        android:layout_width="48dp"
+        android:layout_height="86dp"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/garrafao" />
+
+    <LinearLayout
+        android:layout_width="165dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:backgroundTint="#5E5C5C"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="nome"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/litros"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="litros"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/preco"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="preco"
+            android:textColor="#32AE32"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/quantidade"
+        android:layout_width="124dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="bottom|right"
+        android:text="quantidade"
+        android:textColor="#606060"
+        android:textSize="18sp" />
+
+</LinearLayout>

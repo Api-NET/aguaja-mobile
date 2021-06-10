@@ -36,7 +36,7 @@ public class ListaProdActivity extends AppCompatActivity {
     List<Produto> produtos = Produto.criaVarios();
     List<Integer>  idEstGl = new ArrayList<>();
     ListView estoqueListaView;
-    ArrayAdapter<Estoque> adapter;
+    ListaEstoqueAdapter adapter;
     List<Estoque> listEstoque = new ArrayList<>();
 
     private String urlEstoque = DomainName.NAME + "/api/stock";
@@ -87,7 +87,7 @@ public class ListaProdActivity extends AppCompatActivity {
         meuQue.add(jsonArrayRequestEstoque);
 
 
-        adapter = new ArrayAdapter<Estoque>(this, android.R.layout.simple_list_item_1, listEstoque);
+        adapter = new ListaEstoqueAdapter(getApplicationContext(), listEstoque);
         estoqueListaView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

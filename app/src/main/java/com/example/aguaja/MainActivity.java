@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity{
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+
                         try {
                             StringBuilder texto = new StringBuilder();
                             for(int i = 0; i<response.length(); i++){
@@ -64,8 +65,7 @@ public class MainActivity extends AppCompatActivity{
                                 String senha = obj.getString("password");
                                 checaCredenciais(email, senha);
                             }
-                            Toast toast = Toast.makeText(getApplicationContext(), "Usuário ou senha incorretos!", Toast.LENGTH_LONG);
-                            toast.show();
+
                         }catch(JSONException e) {
                             e.printStackTrace();
                         }
@@ -81,13 +81,13 @@ public class MainActivity extends AppCompatActivity{
     public void checaCredenciais(String email, String senha) {
 
         if (this.email.getText().toString().equals(email)  && this.senha.getText().toString().equals(senha)  ){
-
             chamaLista();
         }
-
     }
 
     private void chamaLista() {
+        Toast toast = Toast.makeText(getApplicationContext(), "Bem Vindo!", Toast.LENGTH_LONG);
+        toast.show();
         Intent intent = new Intent(this, ListaProdActivity.class);
         startActivity(intent);
     }
