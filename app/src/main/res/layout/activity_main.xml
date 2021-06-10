@@ -29,15 +29,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:background="@drawable/button_green_main_activity"
+        android:backgroundTint="#08A391"
         android:onClick="clica"
         android:text="Login" />
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="91dp"
-        android:layout_height="wrap_content"
-        android:text="texto" />
 
 
 </LinearLayout>
