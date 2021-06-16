@@ -3,6 +3,7 @@ package com.example.aguaja;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,14 +34,14 @@ import java.util.Map;
 
 public class MostraProdutoActivity extends AppCompatActivity {
     private String url = DomainName.NAME + "/api/stock/";
-    private String urlPost = DomainName.NAME + "/api/order/";
-    Button btnAumentaQtd;
-    EditText quantidade;
-    TextView valorPreco;
-    TextView nomeProduto;
-    TextView descricao;
-    TextView litrosProduto;
-    Estoque est;
+    private String urlPost = DomainName.NAME + "/api/order";
+    private Button btnAumentaQtd;
+    private EditText quantidade;
+    private TextView valorPreco;
+    private TextView nomeProduto;
+    private TextView descricao;
+    private TextView litrosProduto;
+    private Estoque est;
     private RequestQueue meuQue;
     private JsonObjectRequest jsonObjectRequest;
     private StringRequest stringRequestPost;
@@ -57,56 +58,31 @@ public class MostraProdutoActivity extends AppCompatActivity {
         litrosProduto = findViewById(R.id.litros);
         meuQue = Volley.newRequestQueue(this);
         Integer idEst = Integer.parseInt( extras.getString("idEst"));
-        Integer idProd = Integer.parseInt( extras.getString("idProd"));
+        Double custo = Double.parseDouble(extras.getString("preco"));
+        Integer quantidade = Integer.parseInt(extras.getString("quantidade"));
 
-        List<Produto> produtos = Produto.criaVarios();
-        if (extras!= null){
-            url += idEst;
-        }else{
-            System.out.println("Id nulo-------------------------------------------------------");
-        }
 
-        System.out.println("---------------------------------------------------"+url);
+        Integer idProdu = Integer.parseInt(extras.getString("idProd"));
+        String nome = extras.getString("nome");
+        String descProd = extras.getString("descricao");
+        Double litros = Double.parseDouble(extras.getString("litros"));
+        Produto produto = new Produto(idProdu,descProd , litros, nome);
+        est = new Estoque(idEst, custo, quantidade, produto);
 
-        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
+        String[] arDesc = descProd.split(";");
 
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
 
-                            String texto;
-                            Integer id = Integer.parseInt(response.getString("id"));
-                            Double custo = Double.parseDouble(response.getString("cost_sell"));
-                            Integer quantidade = Integer.parseInt(response.getString("quantity"));
-                            est = new Estoque(id, custo, quantidade);
-                            System.out.println(est.getPrecoVenda());
-                            texto = "\nPreço: R$"+ custo + "\n"
-                                    + "Nome: "+ produtos.get(idProd).getNome() + "\n"
-                                    + "Litros: "+ produtos.get(idProd).getLitros() + "L\n"
-                                    + "Descrição: \n"+ produtos.get(idProd).getDescricao();
-                            System.out.println(texto);
-                            nomeProduto.setText(produtos.get(idProd).getNome());
-                            valorPreco.setText("Preço: R$"+custo);
-                            litrosProduto.setText(""+produtos.get(idProd).getLitros()+"L");
-                            descricao.setText(""+produtos.get(idProd).getDescricao());
-                        }catch(JSONException e) {
-                            e.printStackTrace();
-                        }
+        nomeProduto.setText(produto.getNome());
+        valorPreco.setText("Preço: R$"+est.getPrecoVenda());
+        litrosProduto.setText(""+produto.getLitros()+"L");
+        descricao.setText(arDesc[0]+"\n"
+                            +arDesc[1]+"\n"
+                            +arDesc[2]+"\n"
+                            +arDesc[3]);
 
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-
-                    }
-                });
-        meuQue.add(jsonObjectRequest);
 
     }
-    public void aumentaVolume(View view) {
+    public void aumentaQuantidade(View view) {
 
         Integer qutd = Integer.parseInt(quantidade.getText().toString());
         if(qutd < est.getQuatidade()){
@@ -118,7 +94,7 @@ public class MostraProdutoActivity extends AppCompatActivity {
         }
 
     }
-    public void diminuiVolume(View view) {
+    public void diminuiQuantidade(View view) {
         Integer qutd = Integer.parseInt(quantidade.getText().toString());
         if(qutd > 1){
             quantidade.setText((qutd-1)+"");
@@ -149,23 +125,24 @@ public class MostraProdutoActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("date", "2020-12-12");
-                params.put("discount", "50.2");
-                params.put("order_status", "1");
-                params.put("client_id", "1");
-                params.put("seller_id", "1");
-                params.put("Content-Type", "application/json; charset=utf-8");
-                params.put("Accept", "application/json; charset=utf-8");
+                params.put("discount", String.valueOf(50));
+                params.put("order_status", String.valueOf(1));
+                params.put("client_id", String.valueOf(2));
+                params.put("seller_id", String.valueOf(1));
+                params.put("Content-Type", "application/json; charset=utf-8; application/x-www-form-urlencoded");
+                params.put("Accept", "application/json; charset=utf-8; application/x-www-form-urlencoded");
 
                 return params;
             }
+
             @Override
             public String getBodyContentType() {
-                return "application/json; charset=utf-8";
+                return "application/json; charset=utf-8; application/x-www-form-urlencoded";
             }
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/json; charset=utf-8");
+                params.put("Content-Type","application/json");
                 return params;
             }
 
@@ -173,5 +150,6 @@ public class MostraProdutoActivity extends AppCompatActivity {
 
         };
         meuQue.add(stringRequestPost);
+        Toast.makeText(getApplicationContext(), "Compra realizada com sucesso!", Toast.LENGTH_LONG).show();
     }
 }

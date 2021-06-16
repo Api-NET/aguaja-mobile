@@ -32,12 +32,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaProdActivity extends AppCompatActivity {
-    List<String> estStrings = new ArrayList<>();
-    List<Produto> produtos = Produto.criaVarios();
-    List<Integer>  idEstGl = new ArrayList<>();
-    ListView estoqueListaView;
-    ListaEstoqueAdapter adapter;
-    List<Estoque> listEstoque = new ArrayList<>();
+    private ListView estoqueListaView;
+    private ListaEstoqueAdapter adapter;
+    private List<Estoque> listEstoque = new ArrayList<>();
 
     private String urlEstoque = DomainName.NAME + "/api/stock";
 
@@ -63,16 +60,15 @@ public class ListaProdActivity extends AppCompatActivity {
                                 Integer idEst = Integer.parseInt(obj.getString("id"));
                                 Double custo = Double.parseDouble(obj.getString("cost_sell"));
                                 Integer quantidade = Integer.parseInt(obj.getString("quantity"));
-                                Estoque est = new Estoque(idEst, custo, quantidade, produtos.get(i));
-                                idEstGl.add(idEst);
-                                System.out.println(est.getPrecoVenda());
-                                listEstoque.add(est);
-                                estStrings.add("\nPreço: R$"+ custo + "\n"
-                                                + "Nome: "+ produtos.get(i).getNome() + "\n"
-                                                + "Litros: "+ produtos.get(i).getLitros() + "L\n"
-                                                + "Descrição: \n"+ produtos.get(i).getDescricao());
-                            }
 
+                                Integer idProd = Integer.parseInt(obj.getJSONObject("product").getString("id"));
+                                String nome = obj.getJSONObject("product").getString("name");
+                                String descricao = obj.getJSONObject("product").getString("description");
+                                Double litros = Double.parseDouble(obj.getJSONObject("product").getString("liters"));
+                                Produto produto = new Produto(idProd,descricao, litros, nome);
+                                Estoque est = new Estoque(idEst, custo, quantidade, produto);
+                                listEstoque.add(est);
+                            }
                             estoqueListaView.setAdapter(adapter);
                         }catch(JSONException e) {
                             e.printStackTrace();
@@ -95,11 +91,14 @@ public class ListaProdActivity extends AppCompatActivity {
                 Bundle parametros = new Bundle();
                 Intent intent = new Intent(getApplicationContext(), MostraProdutoActivity.class);
                 parametros.putString("idEst", ""+estoque.getId());
-                parametros.putString("idProd", ""+(estoque.getProduto().getId()-1));
+                parametros.putString("preco", ""+estoque.getPrecoVenda());
+                parametros.putString("quantidade", ""+estoque.getQuatidade());
+                parametros.putString("idProd", ""+estoque.getProduto().getId());
+                parametros.putString("nome", ""+estoque.getProduto().getNome());
+                parametros.putString("descricao", ""+estoque.getProduto().getDescricao());
+                parametros.putString("litros", ""+estoque.getProduto().getLitros());
+
                 intent.putExtras(parametros);
-            System.out.println("Estoque na posição: "+position+" : "+listEstoque.get(position));
-                Toast toast = Toast.makeText(getApplicationContext(), ""+position +" ----- " + estoque.getId(), Toast.LENGTH_LONG);
-                toast.show();
                 startActivity(intent);
             }
         });

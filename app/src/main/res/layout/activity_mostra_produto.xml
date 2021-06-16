@@ -67,7 +67,7 @@
             android:layout_width="57dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#147511"
-            android:onClick="aumentaVolume"
+            android:onClick="aumentaQuantidade"
             android:text="+" />
 
         <EditText
@@ -84,7 +84,7 @@
             android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#DF1919"
-            android:onClick="diminuiVolume"
+            android:onClick="diminuiQuantidade"
             android:text="-" />
 
         <TextView

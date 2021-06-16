@@ -25,9 +25,9 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 public class MainActivity extends AppCompatActivity{
-    EditText email;
-    EditText senha;
-    TextView lblRest;
+    private EditText email;
+    private EditText senha;
+    private TextView lblRest;
     private String url = DomainName.NAME + "/api/client";
 
 
